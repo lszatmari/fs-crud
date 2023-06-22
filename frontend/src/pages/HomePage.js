@@ -18,12 +18,15 @@ const HomePage = () => {
 export default HomePage;
 
 export const loader = async () => {
-  const response = await fetch('http://localhost:8080/');
-  console.log(response);
-
-  if (!response.ok) {
-    return json({message: 'Could not load races'}, {status: 500});
-  } else {
-    return response;
+  let response = null;
+  try {
+    response = await fetch('http://localhost:8080/');
+  } catch (e) {
+    return json({message: 'Something happened with the server.', isError: true});
   }
+
+  if (!response.ok)
+    return json({message: 'Could not load races', isError: true}, {status: 500});
+
+  return response;
 }

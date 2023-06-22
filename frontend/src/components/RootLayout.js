@@ -1,10 +1,11 @@
 import {Outlet} from "react-router-dom";
 import {Container} from "react-bootstrap";
+import MainNavigation from "./MainNavigation";
 
 const RootLayout = () => {
   return (
     <>
-      <h2 align="center">This is the navigation component</h2>
+      <MainNavigation />
       <Container>
         <Outlet/>
       </Container>
