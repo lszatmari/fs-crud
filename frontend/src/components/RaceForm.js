@@ -1,28 +1,34 @@
 import {Form, json, redirect, useLoaderData} from "react-router-dom";
+import {FormControl, FormSelect} from "react-bootstrap";
 
 const RaceForm = () => {
-  const pilots = useLoaderData();
+  const info = useLoaderData();
 
   return (
-    <Form method="post">
-      <p>
-        <label htmlFor="destination">Race destination</label>
-        <input id="destination" name="destination" type="text" required/>
-      </p>
-      <p>
-        <label htmlFor="race-winner">Race winner</label>
-        <select name="race-winner" id="race-winner">
+    <Form className="col-md-4" method="post">
+      <div className="my-3">
+        <label className="fs-6" htmlFor="destination">Race destination</label>
+        <FormSelect size="lg" className="custom-select" name="destination" id="destination">
           {
-            pilots.map(pilot => <option key={pilot.id} value={pilot.id}>{pilot.name}</option>)
+            info.destinations.map(destination => <option key={destination.id}
+                                                         value={destination.id}>{destination.name}</option>)
           }
-        </select>
-      </p>
-      <p>
-        <label htmlFor="race-date">Race date</label>
-        <input id="race-date" name="race-date" type="datetime-local" required/>
-      </p>
+        </FormSelect>
+      </div>
+      <div className="my-3">
+        <label className="fs-6" htmlFor="race-winner">Race winner</label>
+        <FormSelect size="lg" name="race-winner" id="race-winner">
+          {
+            info.pilots.map(pilot => <option key={pilot.id} value={pilot.id}>{pilot.name}</option>)
+          }
+        </FormSelect>
+      </div>
+      <div className="col-6 my-3">
+        <label className="fs-6" htmlFor="race-date">Race date</label>
+        <FormControl className="d-block" id="race-date" name="race-date" type="date" required/>
+      </div>
       <div>
-        <button>Save</button>
+        <button className="btn btn-primary">Save</button>
       </div>
     </Form>
   );
@@ -56,7 +62,7 @@ export const action = async ({request, params}) => {
 }
 
 export const loader = async () => {
-  const response = await fetch('http://localhost:8080/get-all-pilots');
+  const response = await fetch('http://localhost:8080/races/get-all-info');
 
   return response;
 }

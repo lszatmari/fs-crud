@@ -6,7 +6,7 @@ const RootLayout = () => {
   return (
     <>
       <MainNavigation />
-      <Container>
+      <Container fluid="lg">
         <Outlet/>
       </Container>
     </>

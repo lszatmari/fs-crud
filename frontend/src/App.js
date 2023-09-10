@@ -2,7 +2,7 @@ import './App.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import RootLayout from "./components/RootLayout";
 import HomePage from "./pages/HomePage";
-import {loader as raceLoader} from "./pages/HomePage";
+import {loader as racesLoader} from "./pages/HomePage";
 import ErrorPage from "./pages/ErrorPage";
 import RaceForm from "./components/RaceForm";
 import {action as manipulateRaceAction, loader as loadPilotsLoader} from "./components/RaceForm";
@@ -18,13 +18,17 @@ function App() {
         {
           index: true,
           element: <HomePage />,
-          loader: raceLoader
+          loader: racesLoader
         },
         {
           path: "/races/add",
           element: <RaceForm />,
           action: manipulateRaceAction,
           loader: loadPilotsLoader
+        },
+        {
+          path: "/races/{id}/edit",
+          element: <RaceForm />,
         }
       ]
     }

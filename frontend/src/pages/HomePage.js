@@ -1,16 +1,27 @@
 import {json, useLoaderData} from "react-router-dom";
 import RacesList from "../components/RacesList";
+import {useState} from "react";
 
 const HomePage = () => {
-  const data = useLoaderData();
+  const [data, setData] = useState(useLoaderData());
 
   if (data.isError) {
     return <p>{data.message}</p>;
   }
 
+  const handleRowDelete = async (id) => {
+    const response = await fetch('http://localhost:8080/races/' + id, {method: 'DELETE'})
+
+    if (!response.ok) {
+      console.log('Not ok');
+    } else {
+      setData((prevList) => prevList.filter(item => item.id !== id));
+    }
+  }
+
   return (
     <>
-      <RacesList data={data}/>
+      <RacesList data={data} deleteHandler={handleRowDelete}/>
     </>
   )
 }

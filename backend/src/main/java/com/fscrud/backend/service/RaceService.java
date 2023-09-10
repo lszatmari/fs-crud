@@ -50,4 +50,8 @@ public class RaceService {
 
         return new Race(newPilot, newDestination, date, dnfs);
     }
+
+    public void delete(Long id) {
+        raceRepository.deleteById(id);
+    }
 }

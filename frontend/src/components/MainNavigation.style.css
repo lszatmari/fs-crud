@@ -1,0 +1,19 @@
+header {
+    background-color: #e10600;
+}
+
+header .main-nav {
+    margin-bottom: 10px;
+}
+
+header .main-nav .header-nav-item {
+    margin: 0;
+    line-height: 3;
+    font-size: 1.2rem;
+    transition: background-color .25s linear;
+}
+
+header .main-nav .header-nav-item:hover {
+    background-color: #000;
+}
+
